@@ -4,7 +4,8 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import vitePluginVuedoc from 'vite-plugin-vuedoc';
 
 export default defineConfig({
-  root: 'docs/',
+  root: 'examples/',
+  base: './',
   plugins: [
     vitePluginVuedoc({
       highlight: {
@@ -14,4 +15,7 @@ export default defineConfig({
     vue(),
     vueJsx(),
   ],
+  build: {
+    outDir: '../docs'
+  }
 });

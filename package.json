@@ -1,6 +1,6 @@
 {
   "name": "antd-vue-wrapper",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "基于 Vue3 和 Ant Design Vue 封装的常用集合",
   "author": "ziping <ziping@xencapital.com>",
   "license": "MIT",
@@ -20,9 +20,13 @@
   "main": "dist/index.js",
   "types": "dist/src/main.d.ts",
   "files": [
-    "lib",
-    "es"
+    "dist",
+    "src"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ziping-li/antd-vue-wrapper.git"
+  },
   "scripts": {
     "dev": "vite",
     "build:docs": "vite build",
