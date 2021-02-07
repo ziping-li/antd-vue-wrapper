@@ -7,8 +7,8 @@ const Menu = defineComponent({
   props: {
     title: {
       type: String,
-      default: ""
-    }
+      default: '',
+    },
   },
   setup(props) {
     const router = useRouter();
@@ -45,7 +45,7 @@ const Menu = defineComponent({
         ]}
         onClick={this.onClick}
       >
-        {this.menus.map((menu) => {
+        {this.menus.map((menu: any) => {
           if (menu.children) {
             return (
               <a-sub-menu
@@ -54,7 +54,7 @@ const Menu = defineComponent({
                   title: () => <span>{menu.title}</span>,
                 }}
               >
-                {menu.children.map((menuItems) => (
+                {menu.children.map((menuItems: any) => (
                   <a-menu-item key={menuItems.path}>{menuItems.title}</a-menu-item>
                 ))}
               </a-sub-menu>
@@ -81,11 +81,7 @@ export default defineComponent({
       <a-layout id="layout">
         <a-layout-header class="layout-header">
           <router-link to="/" class="layout-logo">
-            <img
-              alt="logo"
-              height="32"
-              src="https://qn.antdv.com/logo.png"
-            />
+            <img alt="logo" height="32" src="https://qn.antdv.com/logo.png" />
             <span class="title">{this.title}</span>
           </router-link>
         </a-layout-header>
