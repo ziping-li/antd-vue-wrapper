@@ -1,0 +1,283 @@
+@plugin "./plugins/getVars.ts";
+
+@basic-number: getNumberVarsToPx('basic-number');
+@number: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14;
+@spaceValues: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, auto;
+@breakpoints-list: getNumberVarsToPx('screen-xs'), getNumberVarsToPx('screen-sm'), getNumberVarsToPx('screen-md'),
+getNumberVarsToPx('screen-lg'), getNumberVars('screen-xl'), getNumberVarsToPx('screen-xxl'), 9999px;
+@breakpoints: {
+  xs: getNumberVarsToPx('screen-xs');
+  sm: getNumberVarsToPx('screen-sm');
+  md: getNumberVarsToPx('screen-md');
+  lg: getNumberVarsToPx('screen-lg');
+  xl: getNumberVarsToPx('screen-xl');
+  xxl: getNumberVarsToPx('screen-xxl');
+};
+
+.breakpoints-mixins(@prefix, @properties, @value) {
+  .@{prefix}@{value} {
+    @{properties}: @value;
+  }
+  each(@breakpoints, .(@v, @k, @i){
+    .@{prefix}@{k}-@{value} {
+      @media (min-width: @v) and (max-width: extract(@breakpoints-list, @i + 1)) {
+        @{properties}: @value !important;
+      }
+    }
+  });
+}
+
+.breakpoints-space-mixins(@prefix, @properties, @value) {
+  .@{prefix}@{value} {
+    @{properties}: if(isnumber(@value), @value * @basic-number, @value);
+  }
+  each(@breakpoints, .(@v, @k, @i){
+    .@{prefix}@{k}-@{value} {
+      @media (min-width: @v) and (max-width: extract(@breakpoints-list, @i + 1)) {
+        @{properties}: if(isnumber(@value), @value * @basic-number, @value) !important;
+      }
+    }
+  });
+}
+
+.breakpoints-space-x-mixins(@prefix, @properties, @value) {
+  .@{prefix}@{value} {
+    @{properties}-left: if(isnumber(@value), @value * @basic-number, @value);
+    @{properties}-right: if(isnumber(@value), @value * @basic-number, @value);
+  }
+  each(@breakpoints, .(@v, @k, @i){
+    .@{prefix}@{k}-@{value} {
+      @media (min-width: @v) and (max-width: extract(@breakpoints-list, @i + 1)) {
+        @{properties}-left: if(isnumber(@value), @value * @basic-number, @value) !important;
+        @{properties}-right: if(isnumber(@value), @value * @basic-number, @value) !important;
+      }
+    }
+  });
+}
+
+.breakpoints-space-y-mixins(@prefix, @properties, @value) {
+  .@{prefix}@{value} {
+    @{properties}-top: if(isnumber(@value), @value * @basic-number, @value);
+    @{properties}-bottom: if(isnumber(@value), @value * @basic-number, @value);
+  }
+  each(@breakpoints, .(@v, @k, @i){
+    .@{prefix}@{k}-@{value} {
+      @media (min-width: @v) and (max-width: extract(@breakpoints-list, @i + 1)) {
+        @{properties}-top: if(isnumber(@value), @value * @basic-number, @value) !important;
+        @{properties}-bottom: if(isnumber(@value), @value * @basic-number, @value) !important;
+      }
+    }
+  });
+}
+
+@properties: {
+  @display: {
+    @key: display;
+    @values: block, inline, inline-block, none, flex, inline-flex, table, table-cell, table-row;
+    @prefix: d-;
+  };
+  @flex-direction: {
+    @key: flex-direction;
+    @values: row, row-reverse, column, column-reverse;
+    @prefix: direction-;
+  };
+  @flex-wrap: {
+    @key: flex-wrap;
+    @values: nowrap, wrap, wrap-reverse;
+    @prefix: wrap-;
+  };
+  @justify-content: {
+    @key: justify-content;
+    @values: flex-start, flex-end, center, space-between, space-around;
+    @prefix: justify-;
+  };
+  @align-items: {
+    @key: align-items;
+    @values: flex-start, flex-end, center, baseline, stretch;
+    @prefix: align-;
+  };
+  @order: {
+    @key: order;
+    @values: @number;
+    @prefix: order-;
+  };
+  @flex-grow: {
+    @key: flex-grow;
+    @values: @number;
+    @prefix: grow-;
+  };
+  @flex-shrink: {
+    @key: flex-shrink;
+    @values: @number;
+    @prefix: shrink-;
+  };
+  @flex: {
+    @key: flex;
+    @values: auto, 1, none;
+    @prefix: flex-;
+  };
+  @align-self: {
+    @key: align-self;
+    @values: auto, flex-start, flex-end, center, baseline, stretch;
+    @prefix: align-self-;
+  };
+  @float: {
+    @key: float;
+    @values: left, right, none;
+    @prefix: float-;
+  };
+  @text-align: {
+    @key: text-align;
+    @values: left, center, right;
+    @prefix: text-;
+  };
+  @font-weight: {
+    @key: font-weight;
+    @values: 100, 300, 400, 500, 700, 900;
+    @prefix: font-weight-;
+  };
+  @font-style: {
+    @key: font-style;
+    @values: normal, italic, oblique;
+    @prefix: font-style-;
+  };
+  @text-decoration: {
+    @key: text-decoration;
+    @values: none, overline, underline, line-through;
+    @prefix: text-decoration-;
+  };
+  @text-transform: {
+    @key: text-transform;
+    @values: uppercase, lowercase, capitalize, none, full-width;
+    @prefix: text-transform-;
+  };
+};
+
+@spaces: {
+  @margin-top: {
+    @key: margin-top;
+    @values: @spaceValues;
+    @prefix: mt-;
+  };
+  @margin-bottom: {
+    @key: margin-bottom;
+    @values: @spaceValues;
+    @prefix: mb-;
+  };
+  @margin-left: {
+    @key: margin-left;
+    @values: @spaceValues;
+    @prefix: ml-;
+  };
+  @margin-right: {
+    @key: margin-right;
+    @values: @spaceValues;
+    @prefix: mr-;
+  };
+  @padding-top: {
+    @key: padding-top;
+    @values: @spaceValues;
+    @prefix: pt-;
+  };
+  @padding-bottom: {
+    @key: padding-bottom;
+    @values: @spaceValues;
+    @prefix: pb-;
+  };
+  @padding-left: {
+    @key: padding-left;
+    @values: @spaceValues;
+    @prefix: pl-;
+  };
+  @padding-right: {
+    @key: padding-right;
+    @values: @spaceValues;
+    @prefix: pr-;
+  };
+}
+
+@spaces-x: {
+  @margin: {
+    @key: margin;
+    @values: @spaceValues;
+    @prefix: mx-;
+  };
+  @padding: {
+    @key: padding;
+    @values: @spaceValues;
+    @prefix: px-;
+  };
+}
+
+@spaces-y: {
+  @margin: {
+    @key: margin;
+    @values: @spaceValues;
+    @prefix: my-;
+  };
+  @padding: {
+    @key: padding;
+    @values: @spaceValues;
+    @prefix: py-;
+  };
+}
+
+each(@properties, {
+  each(@value[@values], .(@v, @k, @i){
+    .breakpoints-mixins(@value[@prefix], @value[@key], @v);
+  });
+});
+
+each(@spaces, {
+  each(@value[@values], .(@v, @k, @i){
+    .breakpoints-space-mixins(@value[@prefix], @value[@key], @v);
+  });
+});
+
+each(@spaces-x, {
+  each(@value[@values], .(@v, @k, @i){
+    .breakpoints-space-x-mixins(@value[@prefix], @value[@key], @v);
+  });
+});
+
+each(@spaces-y, {
+  each(@value[@values], .(@v, @k, @i){
+    .breakpoints-space-y-mixins(@value[@prefix], @value[@key], @v);
+  });
+});
+
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+each(@breakpoints, .(@v, @k, @i){
+  .text-ellipsis-@{k} {
+    @media (min-width: @v) and (max-width: extract(@breakpoints-list, @i + 1)) {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+});
+
+each(@number,{
+  .text-ellipsis-@{value} {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: @value;
+  }
+
+  each(@breakpoints, .(@v, @k, @i){
+    .text-ellipsis-@{k}-@{value} {
+      @media (min-width: @v) and (max-width: extract(@breakpoints-list, @i + 1)) {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: @value;
+      }
+    }
+  });
+});

@@ -1,0 +1,21 @@
+{
+  "primary-color": "#1890ff",
+  "link-color": "1890ff",
+  "success-color": "#52c41a",
+  "warning-color": "#faad14",
+  "error-color": "#f5222d",
+  "heading-color": "rgba(0, 0, 0, 0.85)",
+  "text-color": "rgba(0, 0, 0, 0.65)",
+  "text-color-secondary": "rgba(0, 0, 0, 0.45)",
+  "screen-xs": 0,
+  "screen-sm": 576,
+  "screen-md": 768,
+  "screen-lg": 992,
+  "screen-xl": 1200,
+  "screen-xxl": 1600,
+  "layout-header-background": "#ffffff",
+  "input-height-base": "32px",
+  "input-height-lg": "40px",
+  "input-height-sm": "24px",
+  "basic-number": 4
+}

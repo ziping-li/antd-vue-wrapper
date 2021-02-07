@@ -1,0 +1,19 @@
+@plugin "../../style/plugins/getVars.ts";
+
+.a-data-view {
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  margin-bottom: 16px;
+
+  &.xs, &.sm {
+    font-size: 12px;
+  }
+
+  .key {
+    color: getVars("text-color");
+    max-width: 55%;
+  }
+
+  .value {
+    color: getVars("text-color-secondary");
+  }
+}
