@@ -16,7 +16,7 @@ import { defineComponent, getCurrentInstance } from 'vue';
 
 export default defineComponent({
   setup() {
-    const { $breakpoints } = getCurrentInstance().ctx;
+    const { $breakpoints } = getCurrentInstance().appContext.config.globalProperties;
 
     return {
       columns: [
@@ -47,7 +47,7 @@ import { defineComponent, getCurrentInstance, ref } from 'vue';
 
 export default defineComponent({
   setup() {
-    const { $queryMedia } = getCurrentInstance().ctx;
+    const { $queryMedia } = getCurrentInstance().appContext.config.globalProperties;
     const currentBreakpoint = ref('');
     $queryMedia((data) => {
       currentBreakpoint.value = data;
@@ -67,20 +67,6 @@ export default defineComponent({
 
 ```vue demo
 <template>
-  <div>当前断点：{{ vars }}</div>
+  <div>当前断点：{{ $vars }}</div>
 </template>
-
-<script>
-import { defineComponent, getCurrentInstance, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const { $vars } = getCurrentInstance().ctx;
-
-    return {
-      vars: JSON.stringify($vars),
-    };
-  },
-});
-</script>
 ```

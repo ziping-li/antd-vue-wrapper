@@ -21,8 +21,8 @@ export default defineComponent({
       default: 'hover' as BarTrigger,
     },
     direction: {
-      type: String as PropType<BarDirection>,
-      default: 'all' as BarDirection,
+      type: String,
+      default: 'all',
     },
     barStyle: Object,
     thumbStyle: Object,

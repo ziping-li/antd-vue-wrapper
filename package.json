@@ -1,6 +1,6 @@
 {
   "name": "antd-vue-wrapper",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Common collection based on Vue3 and Ant Design Vue package",
   "author": "ziping <ziping@xencapital.com>",
   "license": "MIT",

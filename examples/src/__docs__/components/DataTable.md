@@ -1,4 +1,6 @@
-# DataTable
+# DataTable 数据表格
+
+<code>antd-vue-wrapper</code> 的数据表格，在浏览器 <code>breakpoint</code> 为 <code>xs</code> 和 <code>sm</code> 的时候，将以 <code>a-data-view</code> 的组件形式展示.
 
 ```vue demo
 <template>

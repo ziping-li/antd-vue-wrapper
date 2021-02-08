@@ -9,37 +9,13 @@
 ```vue demo
 <template>
   <div>
-    <p>浏览器名称：{{ browserName }}</p>
-    <p>浏览器版本：{{ browserVersion }}</p>
-    <p>引擎名称：{{ engineName }}</p>
-    <p>引擎版本：{{ engineVersion }}</p>
-    <p>用户代理信息：{{ getUA }}</p>
+    <p>浏览器名称：{{ $browserName }}</p>
+    <p>浏览器版本：{{ $browserVersion }}</p>
+    <p>引擎名称：{{ $engineName }}</p>
+    <p>引擎版本：{{ $engineVersion }}</p>
+    <p>用户代理信息：{{ $getUA }}</p>
   </div>
 </template>
-
-<script>
-import { defineComponent, getCurrentInstance } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const {
-      $browserName,
-      $browserVersion,
-      $engineName,
-      $engineVersion,
-      $getUA,
-    } = getCurrentInstance().ctx;
-
-    return {
-      browserName: $browserName,
-      browserVersion: $browserVersion,
-      engineName: $engineName,
-      engineVersion: $engineVersion,
-      getUA: $getUA,
-    };
-  },
-});
-</script>
 ```
 
 ## 系统信息
@@ -49,25 +25,10 @@ export default defineComponent({
 ```vue demo
 <template>
   <div>
-    <p>设备名称：{{ osName }}</p>
-    <p>设备版本：{{ osVersion }}</p>
+    <p>设备名称：{{ $osName }}</p>
+    <p>设备版本：{{ $osVersion }}</p>
   </div>
 </template>
-
-<script>
-import { defineComponent, getCurrentInstance } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const { $osName, $osVersion } = getCurrentInstance().ctx;
-
-    return {
-      osName: $osName,
-      osVersion: $osVersion,
-    };
-  },
-});
-</script>
 ```
 
 ## 其他浏览器属性判断
@@ -107,7 +68,7 @@ export default defineComponent({
       $isTablet,
       $isWinPhone,
       $isWindows,
-    } = getCurrentInstance().ctx;
+    } = getCurrentInstance().appContext.config.globalProperties;
 
     return {
       properties: {

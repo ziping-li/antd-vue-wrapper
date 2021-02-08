@@ -43,7 +43,9 @@ export default defineComponent({
         const description = app?.vnode?.el?.querySelector('.ant-alert-description');
         const wrapper = app?.attrs.description || app?.slots.description ? description : title;
         wrapper.appendChild(container);
-        wrapper.className += ` a-alert-${props.position}`;
+        wrapper.className += ` a-alert-${
+          !app?.attrs.description && !app?.slots.description ? 'right' : props.position
+        }`;
       }
     };
 

@@ -18,7 +18,7 @@ export const isPhone = (phone: any, separator: string = '') => {
   return pn.isValid();
 };
 
-export const getPhoneNumber = (phone: any, separator: string = '') => {
+export const getPhoneNumber = (phone: any, separator: string = '', code = '+86') => {
   try {
     if (separator && phone.includes(separator)) {
       const phoneArray = phone.split(separator);
@@ -31,7 +31,7 @@ export const getPhoneNumber = (phone: any, separator: string = '') => {
     const pn = new PhoneNumber(phone);
     if (!isPhone(phone, separator)) {
       return {
-        code: '+86',
+        code,
         phone,
       };
     } else {
@@ -42,18 +42,18 @@ export const getPhoneNumber = (phone: any, separator: string = '') => {
     }
   } catch (err) {
     return {
-      code: '+86',
+      code,
       phone: '',
     };
   }
 };
 
-export const checkPhone = (separator: string = '') => (_: any, value: string, callback: any) => {
+export const checkPhone = (separator: string = '') => (_rule: any, value: string) => {
   if (!value) {
-    callback(new Error('请输入手机号'));
+    return Promise.reject('请输入手机号');
   } else if (!isPhone(value, separator)) {
-    callback(new Error('请输入正确的手机号'));
+    return Promise.reject('请输入正确的手机号');
   } else {
-    callback();
+    return Promise.resolve();
   }
 };

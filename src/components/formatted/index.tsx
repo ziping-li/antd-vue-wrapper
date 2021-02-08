@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, reactive, onBeforeUnmount } from 'vue';
+import { defineComponent, getCurrentInstance, onMounted, reactive, onBeforeUnmount } from 'vue';
 import Cleave from 'cleave.js';
 import './index.less';
 
@@ -24,13 +24,12 @@ export default defineComponent({
     const onValueChanged = (e: any) => {
       cleave.setRawValue(e.target.value);
       const value = cleave.getRawValue();
-      emit('input', value);
-      emit('change', value);
       emit('update:modelValue', value);
+      emit('change', value);
     };
 
     onMounted(() => {
-      cleave = new Cleave('.a-formatted', {
+      cleave = new Cleave(getCurrentInstance()?.vnode.el, {
         ...props.options,
       });
       cleave.setRawValue(props.modelValue);

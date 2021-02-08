@@ -11,16 +11,34 @@ export default defineComponent({
       default: '',
     },
     modelValue: String,
+    showCode: {
+      type: Boolean,
+      default: true,
+    },
+    defaultCode: {
+      type: String,
+      default: '+86',
+    },
   },
   setup(props, { attrs, emit }) {
     const codes = getSupportedCallingCodes();
-    const state = reactive(getPhoneNumber(props.modelValue, props.separator));
+    const getCurrentNumber = () => {
+      if (!props.showCode) {
+        return {
+          code: '',
+          phone: props.modelValue,
+        };
+      } else {
+        return getPhoneNumber(props.modelValue, props.separator, props.defaultCode);
+      }
+    };
+
+    const state = reactive(getCurrentNumber());
 
     const onChange = () => {
       const currentValue = state.code + props.separator + state.phone;
-      emit('input', currentValue);
-      emit('change', currentValue);
       emit('update:modelValue', currentValue);
+      emit('change', currentValue);
     };
 
     const { onInput, ...restAttrs } = attrs;
@@ -31,17 +49,25 @@ export default defineComponent({
         class="a-phone"
         v-model={[state.phone, 'value']}
         v-slots={{
-          addonBefore: () => (
-            <a-select v-model={[state.code, 'value']} style={{ width: '70px' }} onChange={onChange}>
-              {codes.map((item) => {
-                return (
-                  <a-select-option key={item} value={item}>
-                    {item}
-                  </a-select-option>
-                );
-              })}
-            </a-select>
-          ),
+          addonBefore: () => {
+            return (
+              props.showCode && (
+                <a-select
+                  v-model={[state.code, 'value']}
+                  style={{ width: '70px' }}
+                  onChange={onChange}
+                >
+                  {codes.map((item) => {
+                    return (
+                      <a-select-option key={item} value={item}>
+                        {item}
+                      </a-select-option>
+                    );
+                  })}
+                </a-select>
+              )
+            );
+          },
         }}
       ></a-input>
     );

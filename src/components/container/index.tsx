@@ -13,8 +13,12 @@ export default defineComponent({
   setup(props, { slots }) {
     const media = ref('');
     queryMedia((data: string) => (media.value = data));
-    const className = computed(() => ['avw-container', props.fuild ? 'fuild' : '', media.value]);
+    const className = computed(() => ({
+      'avw-container': true,
+      fuild: props.fuild,
+      [media.value]: true,
+    }));
 
-    return () => <div class={className}>{slots.default?.()}</div>;
+    return () => <div class={className.value}>{slots.default?.()}</div>;
   },
 });
