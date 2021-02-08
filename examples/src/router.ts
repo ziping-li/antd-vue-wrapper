@@ -11,6 +11,7 @@ const expandRoutes = () => {
           ...child,
           meta: {
             title: child.title,
+            anchor: child.anchor,
           },
         });
       });
@@ -19,6 +20,7 @@ const expandRoutes = () => {
         ...item,
         meta: {
           title: item.title,
+          anchor: item.anchor,
         },
       });
     }

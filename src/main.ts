@@ -5,6 +5,7 @@ import theme from './theme';
 import './style/index.less';
 /* util functions */
 import utils from './utils';
+import { transformKey } from './utils/object';
 /* all components */
 import Logo from './components/logo';
 import Container from './components/container';
@@ -34,8 +35,8 @@ const install = (app: App<Element>) => {
   // resgiter theme
   app.config.globalProperties = {
     ...app.config.globalProperties,
-    ...theme,
-    ...utils,
+    ...transformKey(theme),
+    ...transformKey(utils),
   };
   // resgiter components
   components.forEach((Component) => {

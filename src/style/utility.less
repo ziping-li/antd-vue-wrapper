@@ -103,12 +103,12 @@ getNumberVarsToPx('screen-lg'), getNumberVars('screen-xl'), getNumberVarsToPx('s
   };
   @flex-grow: {
     @key: flex-grow;
-    @values: @number;
+    @values: 0, 1;
     @prefix: grow-;
   };
   @flex-shrink: {
     @key: flex-shrink;
-    @values: @number;
+    @values: 0, 1;
     @prefix: shrink-;
   };
   @flex: {
@@ -118,7 +118,7 @@ getNumberVarsToPx('screen-lg'), getNumberVars('screen-xl'), getNumberVarsToPx('s
   };
   @align-self: {
     @key: align-self;
-    @values: auto, flex-start, flex-end, center, baseline, stretch;
+    @values: flex-start, flex-end, center, baseline, stretch;
     @prefix: align-self-;
   };
   @float: {
@@ -133,13 +133,13 @@ getNumberVarsToPx('screen-lg'), getNumberVars('screen-xl'), getNumberVarsToPx('s
   };
   @font-weight: {
     @key: font-weight;
-    @values: 100, 300, 400, 500, 700, 900;
-    @prefix: font-weight-;
+    @values: 400, 500, 700, 900;
+    @prefix: font-;
   };
   @font-style: {
     @key: font-style;
     @values: normal, italic, oblique;
-    @prefix: font-style-;
+    @prefix: font-;
   };
   @text-decoration: {
     @key: text-decoration;
@@ -148,8 +148,8 @@ getNumberVarsToPx('screen-lg'), getNumberVars('screen-xl'), getNumberVarsToPx('s
   };
   @text-transform: {
     @key: text-transform;
-    @values: uppercase, lowercase, capitalize, none, full-width;
-    @prefix: text-transform-;
+    @values: uppercase, lowercase, capitalize;
+    @prefix: text-;
   };
 };
 
@@ -246,14 +246,14 @@ each(@spaces-y, {
   });
 });
 
-.text-ellipsis {
+.ellipsis {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
 each(@breakpoints, .(@v, @k, @i){
-  .text-ellipsis-@{k} {
+  .ellipsis-@{k} {
     @media (min-width: @v) and (max-width: extract(@breakpoints-list, @i + 1)) {
       overflow: hidden;
       white-space: nowrap;
@@ -263,7 +263,7 @@ each(@breakpoints, .(@v, @k, @i){
 });
 
 each(@number,{
-  .text-ellipsis-@{value} {
+  .ellipsis-@{value} {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -271,7 +271,7 @@ each(@number,{
   }
 
   each(@breakpoints, .(@v, @k, @i){
-    .text-ellipsis-@{k}-@{value} {
+    .ellipsis-@{k}-@{value} {
       @media (min-width: @v) and (max-width: extract(@breakpoints-list, @i + 1)) {
         overflow: hidden;
         display: -webkit-box;

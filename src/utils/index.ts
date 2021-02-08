@@ -16,14 +16,13 @@ import {
   deepmerge,
   deepclone,
   pick,
-  transformKey,
 } from './object';
 import { isContained } from './array';
 import { debounce, throttle } from './function';
 import xss from './xss';
 import { getSupportedCallingCodes, getPhoneNumber, isPhone, checkPhone } from './phone';
 
-export default transformKey({
+export default {
   dayjs,
   formatCurrency,
   formatNumber,
@@ -50,4 +49,4 @@ export default transformKey({
   getPhoneNumber,
   isPhone,
   checkPhone,
-});
+};

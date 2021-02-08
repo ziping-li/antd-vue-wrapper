@@ -15,11 +15,11 @@ const Menu = defineComponent({
     const route = useRoute();
 
     const menus = computed(() => config.routes || []);
-    const selectedKeys = ref([route.fullPath]);
+    const selectedKeys = ref([route.path]);
     const openKeys = ref(config.routes.map((route) => route.path));
 
     watchEffect(() => {
-      selectedKeys.value = [route.fullPath];
+      selectedKeys.value = [route.path];
       document.title = `${route.meta.title} | ${props.title}`;
     });
 
@@ -71,9 +71,19 @@ const Menu = defineComponent({
 export default defineComponent({
   name: 'Layout',
   setup() {
+    const route = useRoute();
+
     const title = computed(() => config.title || '');
+    const anchor = computed(() => route.meta.anchor || []);
+
+    const onClick = (e: Event, link: Object) => {
+      e.preventDefault();
+    }
+
     return {
       title,
+      anchor,
+      onClick,
     };
   },
   render() {
@@ -93,6 +103,12 @@ export default defineComponent({
             <a-layout-content class="layout-content">
               <router-view></router-view>
             </a-layout-content>
+
+            <a-anchor class="layout-anchor" offsetTop={30} onClick={this.onClick}>
+              {this.anchor.map((item: any) => {
+                return <a-anchor-link href={'#' + item.anchor} title={item.content} />;
+              })}
+            </a-anchor>
           </a-layout>
         </a-layout>
       </a-layout>

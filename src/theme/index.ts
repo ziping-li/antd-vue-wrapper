@@ -1,6 +1,5 @@
 import enquireJs from 'enquire.js';
 import deviceDetector from 'mobile-device-detect';
-import { transformKey } from '../utils/object';
 import vars from './vars.json';
 
 const breakpoints: Record<string, number> = {
@@ -46,4 +45,4 @@ export const queryMedia = (callback: any) => {
     });
 };
 
-export default transformKey({ breakpoints, queryMedia, ...deviceDetector, vars });
+export default { breakpoints, queryMedia, ...deviceDetector, vars } ;
